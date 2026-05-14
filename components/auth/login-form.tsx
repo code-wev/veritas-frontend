@@ -21,7 +21,7 @@ export default function LoginForm() {
     const user = DEMO_USERS.find((u) => u.email === email);
     if (user) {
       login(email);
-      router.push("/dashboard");
+      router.push("/");
     } else {
       setError("Invalid demo credentials. Use one of the accounts below.");
     }

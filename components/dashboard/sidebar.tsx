@@ -50,7 +50,7 @@ export function Sidebar({
         } ${isMobileOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}>
         <div className='mb-6 flex items-center justify-between gap-3 rounded-2xl px-3 py-3'>
           <Link
-            href='/dashboard'
+            href='/'
             onClick={onCloseMobile}
             className='flex min-w-0 items-center gap-3 overflow-hidden'>
             <span className='flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-linear-to-br from-[#516933] to-[#73914c] text-white shadow-sm'>
