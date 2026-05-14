@@ -56,23 +56,33 @@ export default function LoginForm() {
                 {error}
               </div>
             )}
-            <input
-              type='email'
-              placeholder='Email'
-              className='w-full p-4 border rounded-xl'
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <div className='relative'>
+            <div className='space-y-1'>
+              <label className='text-sm p-1 font-medium text-[#1F2937]'>
+                Email Address
+              </label>
               <input
-                type={showPassword ? "text" : "password"}
-                placeholder='Password'
-                className='w-full p-4 pr-12 border rounded-xl'
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                type='email'
+                placeholder='Email'
+                className='w-full p-4 border rounded-xl mt-1'
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
+            </div>
+            <div className='relative'>
+              <div>
+                <label className='text-sm font-medium text-[#1F2937] p-1'>
+                  Password
+                </label>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  placeholder='Password'
+                  className='w-full p-4 pr-12 border rounded-xl mt-1'
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </div>
               <button
                 type='button'
                 onClick={() => setShowPassword(!showPassword)}
@@ -80,6 +90,25 @@ export default function LoginForm() {
                 {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
               </button>
             </div>
+
+            {/* Remember me and Forgot Password */}
+            <div className='flex justify-between items-center pb-2 mx-1'>
+              <div className='flex justify-center items-center'>
+                {/* A checkbox */}
+                <input
+                  type='checkbox'
+                  id='remember'
+                  className='mr-2 leading-tight accent-primary'
+                />
+                <p className='text-[#1C1F1A] text-sm'>Remember me</p>
+              </div>
+              <Link
+                href='/forgot-password'
+                className='text-sm text-primary underline'>
+                <p>Forgot Password?</p>
+              </Link>
+            </div>
+
             <button
               type='submit'
               className='w-full p-4 sf-mono bg-[#4D7C0F] text-white rounded-xl hover:bg-[#3a5f0c] transition-all'>
