@@ -4,13 +4,8 @@ import { useAuth } from "@/providers/auth-provider";
 import { DASHBOARD_NAVIGATION } from "@/config/navigation";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  ChevronsLeft,
-  ChevronsRight,
-  LayoutDashboard,
-  LogOut,
-  X,
-} from "lucide-react";
+import { ChevronsLeft, ChevronsRight, LogOut, X } from "lucide-react";
+import Image from "next/image";
 
 type SidebarProps = {
   isCollapsed: boolean;
@@ -53,19 +48,13 @@ export function Sidebar({
             href='/'
             onClick={onCloseMobile}
             className='flex min-w-0 items-center gap-3 overflow-hidden'>
-            <span className='flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-linear-to-br from-[#516933] to-[#73914c] text-white shadow-sm'>
-              <LayoutDashboard size={18} />
-            </span>
-            {showLabels ? (
-              <span className='flex min-w-0 flex-col leading-tight'>
-                <span className='truncate text-base font-semibold text-slate-900'>
-                  Logo
-                </span>
-                <span className='truncate text-xs uppercase tracking-[0.2em] text-slate-500'>
-                  Dashboard
-                </span>
-              </span>
-            ) : null}
+            <Image
+              src='/logo2.png'
+              alt='Logo'
+              width={120}
+              height={120}
+              priority
+            />
           </Link>
 
           <button
@@ -89,37 +78,46 @@ export function Sidebar({
           </button>
         </div>
 
-        <div className='mb-6 rounded-2xl bg-slate-50 px-3 py-3 md:mb-8'>
-          <p
-            className={`truncate font-bold text-slate-900 ${showLabels ? "text-lg" : "text-center text-sm"}`}>
-            {showLabels ? user.name : user.name.charAt(0)}
-          </p>
-          {showLabels ? (
-            <p className='truncate text-sm text-slate-500'>{user.role}</p>
-          ) : null}
-        </div>
-
-        <nav className='flex-1 space-y-1 overflow-y-auto'>
-          {navItems.map((item) => {
-            const Icon = item.icon;
-            const isActive = pathname === item.href;
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={onCloseMobile}
-                className={`flex items-center rounded-xl px-3 py-3 transition-colors ${
-                  isActive
-                    ? "bg-[#eef4e4] text-[#516933]"
-                    : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
-                } ${showLabels ? "gap-3" : "justify-center"}`}>
-                <Icon size={20} className='shrink-0' />
-                {showLabels ? (
-                  <span className='truncate'>{item.label}</span>
-                ) : null}
-              </Link>
-            );
-          })}
+        <nav className='flex-1 space-y-4 overflow-y-auto'>
+          {navItems.map((section, sectionIdx) => (
+            <div key={sectionIdx}>
+              {section.title && showLabels ? (
+                <h3 className='px-3 py-2 text-sm font-semibold tracking-wider text-[#1C1F1A] sf-mono'>
+                  {section.title}
+                </h3>
+              ) : null}
+              <div className='space-y-1'>
+                {section.items.map((item) => {
+                  const Icon = item.icon;
+                  const isActive = pathname === item.href;
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={onCloseMobile}
+                      className={`flex items-center rounded-md px-3 py-3 transition-colors ${
+                        isActive
+                          ? "bg-(--fill-weak) text-[#1C1F1A]"
+                          : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+                      } ${showLabels ? "gap-3 justify-between" : "justify-center"}`}>
+                      <div
+                        className={`flex items-center ${showLabels ? "gap-3" : ""}`}>
+                        <Icon size={20} className='shrink-0' color='#1C1F1A' />
+                        {showLabels ? (
+                          <span className='truncate text-sm'>{item.label}</span>
+                        ) : null}
+                      </div>
+                      {showLabels && item.badge ? (
+                        <span className='shrink-0 rounded-md bg-[#eef4e4] px-2 py-0.5 text-xs font-semibold text-[#516933]'>
+                          {item.badge}
+                        </span>
+                      ) : null}
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
         </nav>
 
         <button

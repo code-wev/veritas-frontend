@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 
-export default function SignupForm() {
+export default function ResetPasswordPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [showRetypePassword, setShowRetypePassword] = useState(false);
   const [password, setPassword] = useState("");
@@ -14,18 +14,7 @@ export default function SignupForm() {
   return (
     <section className='flex min-h-screen w-full items-center justify-center'>
       <div className='w-full grid grid-cols-1 md:grid-cols-2 items-stretch '>
-        {/* Left Side: Rounded image card */}
-        <div className='relative hidden md:block w-full h-full min-h-screen overflow-hidden shadow-sm'>
-          <Image
-            src='/auth/auth.jpg'
-            alt='Style City Signup Background'
-            fill
-            className='object-cover object-center scale-[1.02]'
-            priority
-          />
-        </div>
-
-        {/* Right Side: Form */}
+        {/* Left Side: Form */}
         <div className='w-full mx-auto md:mx-0 flex flex-col justify-center px-6 md:px-10 lg:px-24 py-6 min-h-screen'>
           <div className='text-center'>
             <Link
@@ -39,24 +28,13 @@ export default function SignupForm() {
                 height={90}
               />
             </Link>
-            <h1 className='text-4xl font-medium sf-mono'>Sign Up</h1>
+            <h1 className='text-4xl font-medium sf-mono'>Set new password</h1>
             <p className='text-(--text-weak) text-base mt-2'>
-              Enter your email and password to sign up
+              Enter your new password
             </p>
           </div>
 
           <div className='space-y-4 mt-8'>
-            {/* Email */}
-            <div className='space-y-1'>
-              <label className='text-sm font-medium text-[#1F2937]'>
-                Email Address
-              </label>
-              <input
-                type='email'
-                placeholder='@peduarte'
-                className='w-full p-4 border border-gray-200 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-pink-200 mt-1 placeholder:text-(--text-weak)'
-              />
-            </div>
             {/* Password */}
             <div className='space-y-1'>
               <label className='text-sm font-medium text-[#1F2937]'>
@@ -106,18 +84,19 @@ export default function SignupForm() {
             </div>
 
             <button className='w-full sf-mono p-4 bg-primary text-white rounded-xl hover:bg-primary/90 transition-all'>
-              Sign Up
+              Reset Password
             </button>
           </div>
-
-          <p className='text-center text-sm text-[#1C1F1A] mt-8'>
-            Already have an account?{" "}
-            <Link
-              href='/login'
-              className='text-primary font-semibold hover:underline'>
-              Log in
-            </Link>
-          </p>
+        </div>
+        {/* Right Side*/}
+        <div className='relative hidden md:block w-full h-full min-h-screen overflow-hidden shadow-sm'>
+          <Image
+            src='/auth/auth.jpg'
+            alt='Style City Signup Background'
+            fill
+            className='object-cover object-center scale-[1.02]'
+            priority
+          />
         </div>
       </div>
     </section>

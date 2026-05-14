@@ -28,28 +28,26 @@ export default function LoginForm() {
   };
 
   return (
-    <section className='flex min-h-screen w-full bg-[#fdf5f7] items-center justify-center p-4 sm:p-8'>
-      <div className='w-full 2xl:px-40 xl:px-32 lg:px-24 md:px-12 sm:px-8 px-0 grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-25 items-stretch'>
-        {/* Left Side: Rounded image card — matches screenshot */}
-        <div className='relative hidden md:block w-full h-full min-h-125 rounded-2xl overflow-hidden shadow-sm'>
-          <Image
-            src='/images/auth.png'
-            alt='Style City Login Background'
-            fill
-            className='object-cover object-center scale-[1.02]'
-            priority
-          />
-        </div>
-
-        {/* Right Side: Form — content unchanged */}
-        <div className='w-full mx-auto md:mx-0 flex flex-col justify-center py-6'>
+    <section className='flex min-h-screen w-full items-center justify-center'>
+      <div className='w-full grid grid-cols-1 md:grid-cols-2 items-stretch '>
+        {/* Left Side: Form */}
+        <div className='w-full mx-auto md:mx-0 flex flex-col justify-center px-6 md:px-10 lg:px-24 py-6 min-h-screen'>
           <div className='text-center'>
             <Link
               href='/'
-              className='text-4xl font-bold text-center block mb-8'>
-              Logo
+              className='text-4xl font-bold text-center mb-8 flex justify-center items-center '>
+              <Image
+                src='/logo.png'
+                priority
+                alt='Logo'
+                width={90}
+                height={90}
+              />
             </Link>
-            <h1 className='text-3xl font-bold'>Sign In</h1>
+            <h1 className='text-4xl font-medium sf-mono'>Login</h1>
+            <p className='text-(--text-weak) text-base mt-2'>
+              Enter your email and password to login
+            </p>
           </div>
 
           <form onSubmit={handleSubmit} className='space-y-4 mt-8'>
@@ -58,23 +56,33 @@ export default function LoginForm() {
                 {error}
               </div>
             )}
-            <input
-              type='email'
-              placeholder='Email'
-              className='w-full p-4 border rounded-xl'
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <div className='relative'>
+            <div className='space-y-1'>
+              <label className='text-sm p-1 font-medium text-[#1F2937]'>
+                Email Address
+              </label>
               <input
-                type={showPassword ? "text" : "password"}
-                placeholder='Password'
-                className='w-full p-4 pr-12 border rounded-xl'
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                type='email'
+                placeholder='Email'
+                className='w-full p-4 border rounded-xl mt-1'
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
+            </div>
+            <div className='relative'>
+              <div>
+                <label className='text-sm font-medium text-[#1F2937] p-1'>
+                  Password
+                </label>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  placeholder='Password'
+                  className='w-full p-4 pr-12 border rounded-xl mt-1'
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </div>
               <button
                 type='button'
                 onClick={() => setShowPassword(!showPassword)}
@@ -82,21 +90,40 @@ export default function LoginForm() {
                 {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
               </button>
             </div>
+
+            {/* Remember me and Forgot Password */}
+            <div className='flex justify-between items-center pb-2 mx-1'>
+              <div className='flex justify-center items-center'>
+                {/* A checkbox */}
+                <input
+                  type='checkbox'
+                  id='remember'
+                  className='mr-2 leading-tight accent-primary'
+                />
+                <p className='text-[#1C1F1A] text-sm'>Remember me</p>
+              </div>
+              <Link
+                href='/forgot-password'
+                className='text-sm text-primary underline'>
+                <p>Forgot Password?</p>
+              </Link>
+            </div>
+
             <button
               type='submit'
-              className='w-full p-4 bg-[#4D7C0F] text-white rounded-xl hover:bg-[#3a5f0c] transition-all font-semibold'>
-              Sign In
+              className='w-full p-4 sf-mono bg-[#4D7C0F] text-white rounded-xl hover:bg-[#3a5f0c] transition-all'>
+              Login
             </button>
           </form>
 
-          <div className='mt-4'>
-            Didn&apos;t have an account?{" "}
+          <p className='text-center text-sm text-[#1C1F1A] mt-8'>
+            Don&apos;t have an account?{" "}
             <Link
               href='/signup'
-              className='text-[#4D7C0F] font-semibold hover:underline'>
+              className='text-primary font-semibold hover:underline'>
               Sign up
             </Link>
-          </div>
+          </p>
 
           <div className='border-t pt-8 mt-8'>
             <p className='text-sm text-slate-500 mb-4'>
@@ -117,6 +144,16 @@ export default function LoginForm() {
               ))}
             </div>
           </div>
+        </div>
+        {/* Right Side: Rounded image card */}
+        <div className='relative hidden md:block w-full h-full min-h-screen overflow-hidden shadow-sm'>
+          <Image
+            src='/auth/auth.jpg'
+            alt='Style City Signup Background'
+            fill
+            className='object-cover object-center scale-[1.02]'
+            priority
+          />
         </div>
       </div>
     </section>
